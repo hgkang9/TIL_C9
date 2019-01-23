@@ -66,3 +66,18 @@ class User(db.Model):
 
 #ORDER + LIMIT + OFFSET
 #users = User.query.order_by(User.username).limit(1).offset(2).all()
+
+#DELETE
+#DELETE FROM users WHERE id=1;
+#user = User.query.get(1)
+#db.session.delete(user)
+#db.session.commit()
+
+#UPDATE
+#UPDATE users SET username='abc' WHERE id=2;
+#user = User.query.get(2)
+#user.username = 'abc'
+#db.session.commit()
+
+#ALTER TABLE bands ADD COLUMN members INT;
+#열을 추가하고 싶을 때
