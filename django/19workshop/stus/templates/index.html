@@ -7,11 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Post Index</h1>
+    <h1>Index</h1>
     <a href="new/">New</a>
     
-    {% for post in posts %}
-        <li><a href="/posts/{{post.pk}}/">{{post.title}}</a></li>
+    {% for stu in stus %}
+        <li><a href="/stus/{{stu.pk}}/">{{stu.name}}</a></li>
     {% endfor %}
     </ul>
 </body>
