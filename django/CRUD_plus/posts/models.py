@@ -7,6 +7,17 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+        
+        
+class Comment(models.Model):
+    content = models.TextField()
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+# Post : Comment = 1 : N(ForeignKey)
+# on_delete 옵션
+# 1. CASCADE : 부모가 삭제되면, 자기 자신도 삭제
+# 2. PROTECT : 자식이 존재하면, 부모 삭제 불가능
+# 3. SET_NULL : 부모가 삭제되면, 자식의 부모 정보에 NULL 설정
+    
     
 # 1. Create
 # post = Post(title='hello', content='world')

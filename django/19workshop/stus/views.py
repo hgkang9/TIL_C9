@@ -28,7 +28,7 @@ def detail(request, stu_id):
 def delete(request, stu_id):
     stu = Student.objects.get(pk=stu_id)
     stu.delete()
-    return redirect('/stus/')
+    return redirect('stus:list')
     
 def edit(request, stu_id):
     stu = Student.objects.get(pk=stu_id)

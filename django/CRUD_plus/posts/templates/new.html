@@ -8,12 +8,12 @@
 </head>
 <body>
     <!--method : get, post-->
-    <form action="{%url 'posts%}" method="post">
+    <form action="{% url 'posts:create' %}" method="post">
         {% csrf_token %} 
         <!--post는 항상 csrf_token 써야된다 / 보안-->
         <input type="text" name="title"/>
         <input type="text" name="content"/>
-        <input type="submit" value="submit">
+        <input type="submit" value="submit"/>
     </form> 
 </body>
 </html>
