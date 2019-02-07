@@ -1,22 +1,9 @@
 from django.db import models
-from imagekit.models import ProcessedImageField
-from imagekit.processors import ResizeToFill
-#ResizeToFill :  300, 300 맞추고 넘치는 부분 잘라냄
-#ResizetoFit : 300, 300 맞추고 남는 부분 빈 공간으로 둠
 
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=100) #최대길이 필수적으로 정해줘야 한다
     content = models.TextField()
-    # image = models.ImageField(blank=True) #blank=True:빈값이 있어도 된다 / 파일을 올리고 싶으면 FileField() 써도 된다.
-    image = ProcessedImageField(
-        upload_to='posts/images', #저장할 위치
-        processors=[ResizeToFill(300,300)], #처리할 작업 목록
-        format='JPEG', #저장 포맷 (확장자)
-        options={'quality':90}, #저장 포맷 관련 옵션
-    )
-    created_at = models.DateTimeField(auto_now_add=True) #create될 때, 딱 한번 현재 시각이 들어감
-    updated_at = models.DateTimeField(auto_now=True) #변경될 때마다 현재 시각 들어감
     
     def __str__(self):
         return self.title
