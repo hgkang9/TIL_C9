@@ -21,6 +21,13 @@ class Post(models.Model):
         format='JPEG', #저장포맷
         options={'quality':90}, #옵션
         )
+    like_users=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_posts')
     
     #이미지 사용하고 싶을 때:pip install pillow
     #이미지 편집하고 싶을 때:pip install pilkit django-imagekit
+    
+class Comment(models.Model):
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE) #1대N 관계에서 1에 해당하는 것을 ()안에 써줌/user가 1,comment가 N
+    post=models.ForeignKey(Post, on_delete=models.CASCADE) #//이중 1대N 관계
+    content=models.TextField()
+    
