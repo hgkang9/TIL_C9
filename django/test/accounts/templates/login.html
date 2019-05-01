@@ -1,0 +1,10 @@
+{%extends 'base.html'%}
+{%block container%}
+
+<form method="POST">
+    {%csrf_token%}
+    {{login_form}}
+    <input type="submit" value="login"/>
+</form>
+
+{%endblock%}

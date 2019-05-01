@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
 from django.views.decorators.http import require_POST, require_http_methods
+from django.http import JsonResponse
 
 def list(request):
     posts=Post.objects.order_by('-id').all() #정렬할 때 order_by/'-'붙이면 내림차순
@@ -71,7 +72,10 @@ def like(request, post_id):
     if request.user in post.like_users.all(): #all까지 해야 리스트 안에 있는지 검사 가능
         # 좋아요 취소
         post.like_users.remove(request.user)
+        liked=False
     else:
         # 좋아요
         post.like_users.add(request.user)
-    return redirect('posts:list')
+        liked=True
+    # return redirect('posts:list')
+    return JsonResponse({'liked':liked, 'count':post.like_users.count()})

@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+{%block container%}
+
+{% for movie in movies %}
+
+<a href="{%url 'movies:detail' movie.id%}">{{movie.title}}</a>
+
+{% endfor %}
+
+<a href="{%url 'movies:create'%}">New</a>
+
+{%endblock%}

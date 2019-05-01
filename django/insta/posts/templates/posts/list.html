@@ -10,4 +10,26 @@
 
 {% endfor %}
 
+<script>
+const likebuttons=document.querySelectorAll('.like-button')
+likebuttons.forEach(function(button){
+    button.addEventListener('click', function(event){
+        console.log(event)
+        const postid=event.target.dataset.id
+        axios.get(`/posts/${postid}/like/`)
+            .then(function(response){
+                // response.data // {liked:true}
+                document.querySelector(`#like-count-${postid}`).innerText=response.data.count
+                if (response.data.liked) {
+                    event.target.classList.remove('far')
+                    event.target.classList.add('fas')
+                } else {
+                    event.target.classList.remove('fas')
+                    event.target.classList.add('far')
+                }
+            })
+    })
+})
+</script>
+
 {% endblock %}
