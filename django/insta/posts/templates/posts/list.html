@@ -30,6 +30,31 @@ likebuttons.forEach(function(button){
             })
     })
 })
+
+const commentForms=document.querySelectorAll('.comment-form')
+commentForms.forEach(function(form){
+    form.addEventListener('submit', function(event){
+        event.preventDefault() // 원래의 html 이벤트를 수행하지 않도록 막는 역할
+        console.log(event)
+        // event.target == form
+        const data = new FormData(event.target)
+        // Inspect FormData
+        // for (const item of data.entries()){
+        //     console.log(item) // data에 있는 정보들 보고 싶을 때
+        // }
+        axios.post(event.target.action, data)
+            .then(function(response){
+                const comment=response.data
+                const commentList=document.querySelector(`#comment-list-${comment.postid}`)
+                const newComment=`<div class='card-text'>
+                    <strong>${comment.username}</strong>${comment.content}
+                    <a href="/posts/${comment.postid}/comments/${comment.id}/delete/">삭제</a>
+                    </div>`
+                commentList.insertAdjacentHTML('beforeend', newComment)
+                event.target.reset() // 작성되어 있는 내용을 clear(댓글 작성하고 나서 댓글 없어지게 하는 역할)
+            })
+    })
+})
 </script>
 
 {% endblock %}

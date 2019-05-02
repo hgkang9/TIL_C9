@@ -56,8 +56,15 @@ def comment_create(request, post_id):
         comment=comment_form.save(commit=False)
         comment.user=request.user
         comment.post_id=post_id
+        # comment.post=post
         comment.save()
-    return redirect('posts:list')
+    # return redirect('posts:list')
+    return JsonResponse({
+                            'id':comment.id,
+                            'postid':post_id,
+                            'username':comment.user.username,
+                            'content':comment.content,
+                        })
     
 @require_http_methods(['GET','POST'])    
 def comment_delete(request, post_id, comment_id): #순서 중요

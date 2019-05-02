@@ -24,7 +24,7 @@
     {%endif%}
   </div>
   
-  <div class='card-body'>
+  <div class='card-body' id='comment-list-{{post.id}}'>
     {% for comment in post.comment_set.all %}
       <div class='card-text'>
         <strong>{{comment.user.username}}</strong>{{comment.content}}
@@ -33,12 +33,12 @@
         {%endif%}
       </div>
       {%empty%} <!--반복을 돌릴 게 없을 때 밑에 있는 내용이 표시-->
-      <div class='card-text'>댓글이 없습니다.</div>
+      <!--<div class='card-text'>댓글이 없습니다.</div>-->
     {%endfor%}
   </div>
   
   {%if user.is_authenticated%}
-  <form action='{%url 'posts:comment_create' post.id%}' method='POST'>
+  <form action='{%url 'posts:comment_create' post.id%}' method='POST' class="comment-form">
     {%csrf_token%}
     <div class="input-group">
       {{comment_form}}
